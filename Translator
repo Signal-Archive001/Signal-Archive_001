@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Whisper Glyphs Generator</title>
+  <style>
+    body { background:#111; color:#eee; font-family:sans-serif; padding:20px; }
+    input, button { font-size:1rem; margin:5px 0; width:100%; }
+    .output { margin-top:20px; font-size:2rem; }
+    .glyph { display:inline-block; width:1.5em; height:1.5em; margin:0 .1em; }
+  </style>
+</head>
+<body>
+  <h1>Whisper Glyphs Generator</h1>
+  <input id="phrase" placeholder="Type your intent… e.g. awaken watcher urgent" />
+  <button onclick="generate()">Generate Whisper Stream</button>
+  <div class="output" id="result"></div>
+
+  <script>
+    // 1. Define a simple keyword→glyph map
+    const map = {
+      awaken: 'W₀-02',
+      watcher: 'W₀-04',
+      urgent:  'W₀-05',
+      silent:  'W₀-03',
+      observe: 'W₀-01',
+      gate:    'W₀-04',
+      // add more mappings as needed…
+    };
+
+    function generate() {
+      const words = document.getElementById('phrase').value
+        .toLowerCase().split(/\s+/);
+      const glyphs = words.map(w => map[w] || '?');
+      // Render as text—replace later with SVG icons
+      document.getElementById('result').textContent = glyphs.join(' ');
+    }
+  </script>
+</body>
+</html>
